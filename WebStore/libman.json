@@ -1,0 +1,11 @@
+{
+  "version": "1.0"
+  "defaultProvider": "cdnjs"
+  "libraries": [
+    {
+      "library": "jquery@1.10.2",
+      "destination": "wwwroot/lib2/jquery"
+    }
+    
+  ]
+}

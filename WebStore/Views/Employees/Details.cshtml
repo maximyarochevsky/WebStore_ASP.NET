@@ -1,12 +1,13 @@
 ﻿@model WebStore.Models.Employee
 
-    @{
-        ViewData["Title"] = "Информация о сотруднике id: " + Model.Id;
-    }
+@{
+    ViewData["Title"] = "Информация о сотруднике id: " + Model.Id;
+    ViewData["TitleEmployee"] = "Магазин";
+}
 
 <div class="container">
     <div>
-        <h4>Сотрудник</h4>
+        <h4>Сотрудник - @ViewBag.SelectedEmployee.FirstName</h4>
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
@@ -45,4 +46,5 @@
         @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
         <a asp-action="Index">Назад к списку</a>
     </div>
+
 </div>

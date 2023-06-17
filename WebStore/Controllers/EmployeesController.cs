@@ -21,10 +21,12 @@ namespace WebStore.Controllers
         {
             var employee = __Employees.FirstOrDefault(e => e.Id == id);
 
+           
             if(employee is null)
             {
                 return NotFound();
             }
+            ViewBag.SelectedEmployee = employee;
             return View(employee);
         }
     }
