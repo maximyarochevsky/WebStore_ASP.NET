@@ -1,15 +1,9 @@
 ﻿@model IEnumerable<WebStore.Models.Employee>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Employees</title>
-</head>
-<body>
-    <h3>Сотрудники</h3>
-    <table>
+<div class="container">
+     <h3>Сотрудники</h3>
+    <table class="table">
         <thrad>
             <tr>
                 <th>Id</th>
@@ -33,6 +27,8 @@
         </tbody>
 
     </table>
-    <a href="~/Home/Index">На главную</a>
-</body>
-</html>
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div>
+
+   
+
