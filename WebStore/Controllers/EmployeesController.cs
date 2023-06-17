@@ -13,7 +13,8 @@ namespace WebStore.Controllers
         };
         public IActionResult Index()
         {
-            return View(__Employees);
+            var result = __Employees;
+            return View(result);
         }
     }
 }

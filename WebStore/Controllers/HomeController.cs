@@ -10,9 +10,5 @@ namespace WebStore.Controllers
         {
             return View();
         }
-        public IActionResult Employees()
-        {
-            return View(__Employees);
-        }
     }
 }
