@@ -6,9 +6,11 @@ namespace WebStore
     {
         public static void Main(string[] args)
         {
+            //билдер приложения
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
             services.AddControllersWithViews();
+            //создание приложения
             var app = builder.Build();
            
             if (app.Environment.IsDevelopment())
