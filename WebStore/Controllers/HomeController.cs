@@ -8,5 +8,9 @@ namespace WebStore.Controllers
         {
             return View();
         }
+        public IActionResult ConfiguredAction()
+        {
+            return 
+        }
     }
 }
