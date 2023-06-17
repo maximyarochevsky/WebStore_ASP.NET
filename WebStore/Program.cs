@@ -18,6 +18,7 @@ namespace WebStore
             app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseRouting();
        
             app.MapGet("/throw", () =>
