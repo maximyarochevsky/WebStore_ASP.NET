@@ -17,7 +17,7 @@ namespace WebStore
             }
 
             app.UseRouting();
-            app.MapGet("/", () => "Hello World!");
+       
             app.MapGet("/throw", () =>
             {
                 throw new Exception("Ошибка!");
