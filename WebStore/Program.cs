@@ -23,7 +23,10 @@ namespace WebStore
                 throw new Exception("Ошибка!");
             });
 
-            app.MapDefaultControllerRoute();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
             app.Run();
         }
     }
