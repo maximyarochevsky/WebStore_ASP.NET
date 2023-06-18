@@ -30,6 +30,7 @@ namespace WebStore
 
             app.UseMiddleware<TestMiddleware>();
 
+            //app.MapDefaultControllerRoute();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
