@@ -1,4 +1,6 @@
 using System;
+using WebStore.Infastructure.Conventions;
+using WebStore.Infastructure.Middleware;
 
 namespace WebStore
 {
@@ -9,22 +11,24 @@ namespace WebStore
             //билдер приложения
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(opt =>
+            {
+                opt.Conventions.Add(new TestConvention());
+            });
+
+            
             //создание приложения
             var app = builder.Build();
            
             if (app.Environment.IsDevelopment())
-            {
             app.UseDeveloperExceptionPage();
-            }
+          
 
             app.UseStaticFiles();
+
             app.UseRouting();
-       
-            app.MapGet("/throw", () =>
-            {
-                throw new Exception("Ошибка!");
-            });
+
+            app.UseMiddleware<TestMiddleware>();
 
             app.MapControllerRoute(
                 name: "default",
