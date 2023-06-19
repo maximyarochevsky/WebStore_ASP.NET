@@ -1,6 +1,8 @@
 using System;
 using WebStore.Infastructure.Conventions;
 using WebStore.Infastructure.Middleware;
+using WebStore.Services.Interfaces;
+using WebStore.Services
 
 namespace WebStore
 {
@@ -16,6 +18,7 @@ namespace WebStore
                 opt.Conventions.Add(new TestConvention());
             });
 
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             
             //создание приложения
             var app = builder.Build();

@@ -53,9 +53,21 @@ namespace WebStore.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel Model)
         {
-            //Обработка модели...
+
+            if(Model is null)
+                throw new ArgumentNullException(nameof(Model));
+
+            Employee employee = new Employee();
+
+            employee.Id = Model.Id;
+            employee.LastName = Model.LastName;
+            employee.FirstName = Model.FirstName;
+            employee.Patronymic = Model.Patronymic;
+            employee.Age = Model.Age;
+
 
             return RedirectToAction("Index");
         }
