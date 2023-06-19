@@ -1,25 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebStore.Data;
 using WebStore.Models;
+using WebStore.Services.Interfaces;
+using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
+    //[Route("Staff/{action=Index}/{Id?}")]
     public class EmployeesController : Controller
     {
-        public static readonly List<Employee> __Employees = new()
+        private readonly IEmployeesData _EmployeeData;
+
+        public EmployeesController(IEmployeesData employeesData)
         {
-            new Employee{Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", Age = 18 },
-            new Employee{Id = 2, LastName = "Сидоров", FirstName = "Сидор", Patronymic = "Сидорович", Age = 19 },
-            new Employee{Id = 3, LastName = "Петров", FirstName = "Петр", Patronymic = "Петрович", Age = 20 }
-        };
+            _EmployeeData = employeesData;
+        }
         public IActionResult Index()
         {
-            var result = __Employees;
+            var result = _EmployeeData.GetAll();
             return View(result);
         }
 
         public IActionResult Details(int id)
         {
-            var employee = __Employees.FirstOrDefault(e => e.Id == id);
+            var employee = _EmployeeData.GetById(id);
 
            
             if(employee is null)
@@ -29,5 +33,44 @@ namespace WebStore.Controllers
             ViewBag.SelectedEmployee = employee;
             return View(employee);
         }
+
+        public IActionResult Create() => View();
+
+        public IActionResult Edit(int id)
+        {
+            var employee = _EmployeeData.GetById(id);
+            if (employee is null)
+                return NotFound();
+
+            var model = new EmployeeEditViewModel
+            {
+                Id = employee.Id,
+                LastName = employee.LastName,
+                FirstName = employee.FirstName,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EmployeeEditViewModel Model)
+        {
+
+            var employee = new Employee
+            {
+                Id = Model.Id,
+                LastName = Model.LastName,
+                FirstName = Model.FirstName,
+                Patronymic = Model.Patronymic,
+                Age = Model.Age,
+            };
+            if (!_EmployeeData.Edit(employee))
+                return NotFound();
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult Delete(int id) => View();
     }
 }

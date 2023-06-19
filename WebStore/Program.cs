@@ -1,4 +1,8 @@
 using System;
+using WebStore.Infastructure.Conventions;
+using WebStore.Infastructure.Middleware;
+using WebStore.Services.Interfaces;
+using WebStore.Services;
 
 namespace WebStore
 {
@@ -9,23 +13,27 @@ namespace WebStore
             //билдер приложения
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(opt =>
+            {
+                opt.Conventions.Add(new TestConvention());
+            });
+
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            
             //создание приложения
             var app = builder.Build();
            
             if (app.Environment.IsDevelopment())
-            {
             app.UseDeveloperExceptionPage();
-            }
+          
 
             app.UseStaticFiles();
-            app.UseRouting();
-       
-            app.MapGet("/throw", () =>
-            {
-                throw new Exception("Ошибка!");
-            });
 
+            app.UseRouting();
+
+            app.UseMiddleware<TestMiddleware>();
+
+            //app.MapDefaultControllerRoute();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

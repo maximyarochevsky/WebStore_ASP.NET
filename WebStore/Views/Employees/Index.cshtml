@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<WebStore.Models.Employee>
 
+@{
+    ViewData["Title"] = "Список сотрудников";
+}
 
 <div class="container">
      <h3>Сотрудники</h3>
@@ -22,7 +25,8 @@
                     <td>@employee.FirstName</td>
                     <td>@employee.Patronymic</td>
                     <td>@employee.Age</td>
-                    <td><a asp-action="Details" asp-route-Id="@employee.Id">Информация</a></td>
+                    <td><a asp-action="Details" asp-route-id="@employee.Id">Информация</a></td>
+                    <td><a asp-action="Edit" asp-route-id="@employee.Id">Редактирование</a></td>
                 </tr>
             }
         </tbody>
