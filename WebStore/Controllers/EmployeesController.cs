@@ -34,11 +34,14 @@ namespace WebStore.Controllers
             return View(employee);
         }
 
-        public IActionResult Create() => View();
+        public IActionResult Create() => View("Edit", new EmployeeViewModel());
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
-            var employee = _EmployeeData.GetById(id);
+            if (id is null)
+                return View(new EmployeeViewModel());
+
+            var employee = _EmployeeData.GetById((int)id);
             if (employee is null)
                 return NotFound();
 
@@ -66,11 +69,16 @@ namespace WebStore.Controllers
                 Patronymic = Model.Patronymic,
                 Age = Model.Age,
             };
-            if (!_EmployeeData.Edit(employee))
+            if(Model.Id == 0)
+            {
+                _EmployeeData.Add(employee);
+            }
+            else if(!_EmployeeData.Edit(employee))
                 return NotFound();
 
             return RedirectToAction("Index");
         }
+
         public IActionResult Delete(int id)
         {
             if (id < 0) 

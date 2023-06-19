@@ -5,7 +5,12 @@
 }
 
 <div class="container">
-     <h3>Сотрудники</h3>
+    <h3>Сотрудники</h3>
+
+    <a class="btn btn-default" asp-action="Create">Создать</a>
+    @if (Model.Any())
+    {
+   
     <table class="table">
         <thrad>
             <tr>
@@ -30,9 +35,15 @@
                     <td><a asp-action="Delete" asp-route-id="@employee.Id">Удаление</a></td>
                 </tr>
             }
+    
         </tbody>
 
     </table>
+    }
+    else
+    {
+        <p>Сотрудников нет...</p>
+    }
     <a asp-controller="Home" asp-action="Index">На главную</a>
 </div>
 
