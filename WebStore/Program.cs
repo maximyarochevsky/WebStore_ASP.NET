@@ -2,7 +2,7 @@ using System;
 using WebStore.Infastructure.Conventions;
 using WebStore.Infastructure.Middleware;
 using WebStore.Services.Interfaces;
-using WebStore.Services
+using WebStore.Services;
 
 namespace WebStore
 {
