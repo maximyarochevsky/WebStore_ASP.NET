@@ -7,5 +7,5 @@ public interface IProductData
 
     IEnumerable<Brand> GetBrands();
 
-    IEnumerable<Brand> GetProducts(ProductFilter? Filter = null);
+    IEnumerable<Product> GetProducts(ProductFilter? Filter = null);
 }
