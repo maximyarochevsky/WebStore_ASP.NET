@@ -15,8 +15,7 @@ namespace WebStore.Services
         {
             _Employees = TestData.__Employees;
             _MaxFreeId = _Employees.DefaultIfEmpty().Max(e => e?.Id ?? 0) + 1;
-            this.Logger = Logger;
-            logger = Logger;
+            _Logger = Logger;
         }
 
         public IEnumerable<Employee> GetAll()
