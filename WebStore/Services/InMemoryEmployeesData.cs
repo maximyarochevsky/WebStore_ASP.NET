@@ -15,8 +15,7 @@ namespace WebStore.Services
         {
             _Employees = TestData.__Employees;
             _MaxFreeId = _Employees.DefaultIfEmpty().Max(e => e?.Id ?? 0) + 1;
-            this.Logger = Logger;
-            logger = Logger;
+            Logger = Logger;
         }
 
         public IEnumerable<Employee> GetAll()
@@ -52,8 +51,10 @@ namespace WebStore.Services
             var db_employee = GetById(employee.Id);
 
             if (db_employee is null)
+            {
                 _Logger.LogWarning("Попытка редактирования несуществующего сотрудника с id: {0}", employee.Id);
                 return false;
+            }
 
             db_employee.Id = employee.Id;
             db_employee.FirstName = employee.FirstName;
