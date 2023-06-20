@@ -6,4 +6,6 @@ public interface IProductData
     IEnumerable<Section> GetSections();
 
     IEnumerable<Brand> GetBrands();
+
+    IEnumerable<Brand> GetProducts(ProductFilter? Filter = null);
 }
