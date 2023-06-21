@@ -2,9 +2,9 @@
 
 @{
     ViewData["Title"] = "Список сотрудников";
+    Layout = "_LayoutContainer";
 }
 
-<div class="container">
     <h3>Сотрудники</h3>
 
     <a class="btn btn-default" asp-action="Create">Создать</a>
@@ -45,7 +45,5 @@
         <p>Сотрудников нет...</p>
     }
     <a asp-controller="Home" asp-action="Index">На главную</a>
-</div>
-
    
 
