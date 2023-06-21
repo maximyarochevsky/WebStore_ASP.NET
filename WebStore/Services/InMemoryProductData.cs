@@ -15,6 +15,10 @@ public class InMemoryProductData : IProductData
     {
         IEnumerable<Product> query = TestData.Products;
 
+       // if (Filter?.SectionId != null)
+       //    query = query.Where(p => p.SectionId == Filter.SectionId);
+        
+
         if(Filter?.SectionId is { } section_id)
             query = query.Where(p => p.SectionId == section_id);
 
