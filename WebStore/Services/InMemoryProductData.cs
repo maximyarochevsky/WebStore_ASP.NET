@@ -15,10 +15,10 @@ public class InMemoryProductData : IProductData
     {
         IEnumerable<Product> query = TestData.Products;
 
-        if(Filter is { SectionId: var section_id})
+        if(Filter?.SectionId is { } section_id)
             query = query.Where(p => p.SectionId == section_id);
 
-        if(Filter is { BrandId: var brand_id })
+        if(Filter?.BrandId is { } brand_id)
             query = query.Where(p => p.SectionId == brand_id);
         return query;
     }

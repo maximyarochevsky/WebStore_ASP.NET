@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities;
 using WebStore.Services.Interfaces;
-using WebStore.ViewModels
+using WebStore.ViewModels;
 
 namespace WebStore.Controllers;
 
@@ -35,15 +35,5 @@ public class CatalogController : Controller
         };
 
         return View(catalog_model);
-    }
-
-    public IActionResult Details(int Id)
-    {
-        var product = _ProductData.GetProductById(Id);
-
-        if (product is null)
-            return NotFound();
-
-        return View(product.ToView());
     }
 }

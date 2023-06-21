@@ -73,6 +73,6 @@ namespace WebStore.Data
             new Product {Id = 11, Name = "Джинсы женские", Price = 1025, ImageUrl = "product11.jpg", Order = 10, SectionId = 25, BrandId = 3},
             new Product {Id = 12, Name = "Летний костюм", Price = 1025, ImageUrl = "product12.jpg", Order = 11, SectionId = 25, BrandId = 3},
 
-        }
+        };
     }
 }
