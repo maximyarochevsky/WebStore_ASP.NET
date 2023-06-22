@@ -3,6 +3,8 @@ using WebStore.Infastructure.Conventions;
 using WebStore.Infastructure.Middleware;
 using WebStore.Services.Interfaces;
 using WebStore.Services;
+using WebStore.DAL.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStore
 {
@@ -17,6 +19,9 @@ namespace WebStore
             {
                 opt.Conventions.Add(new TestConvention());
             });
+
+            services.AddDbContext<WebStoreDB>(opt =>
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddSingleton<IProductData, InMemoryProductData>();

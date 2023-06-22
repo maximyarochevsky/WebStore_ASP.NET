@@ -22,7 +22,5 @@ public class WebStoreDB : DbContext
 		//	.HasMany(section => section.Products)
 		//	.WithMany(product => product.Section)
 		//	.OnDelete(DeleteBehavior.Cascade);
-
-
 	}
 }
