@@ -2,7 +2,7 @@
 using WebStore.Services.Interfaces;
 using WebStore.Data;
 
-namespace WebStore.Services
+namespace WebStore.Services.InMemory
 {
     public class InMemoryEmployeesData : IEmployeesData
     {
@@ -31,7 +31,7 @@ namespace WebStore.Services
         {
             if (employee is null)
                 throw new ArgumentNullException(nameof(employee));
-            if(_Employees.Contains(employee))
+            if (_Employees.Contains(employee))
                 return employee.Id;
 
             employee.Id = _MaxFreeId++;
@@ -52,7 +52,7 @@ namespace WebStore.Services
 
             if (db_employee is null)
                 _Logger.LogWarning("Попытка редактирования несуществующего сотрудника с id: {0}", employee.Id);
-                return false;
+            return false;
 
             db_employee.Id = employee.Id;
             db_employee.FirstName = employee.FirstName;

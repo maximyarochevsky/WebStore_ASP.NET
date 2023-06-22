@@ -5,6 +5,7 @@ using WebStore.Services.Interfaces;
 using WebStore.Services;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using WebStore.Services.InMemory;
 
 namespace WebStore
 {
