@@ -10,7 +10,7 @@ namespace WebStore
 {
     internal partial class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             //билдер приложения
             var builder = WebApplication.CreateBuilder(args);
@@ -22,15 +22,22 @@ namespace WebStore
 
             services.AddDbContext<WebStoreDB>(opt =>
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+            services.AddTransient<IDbInitializer, DbInitializer>();
 
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddSingleton<IProductData, InMemoryProductData>();
             
             //создание приложения
             var app = builder.Build();
-           
-            if (app.Environment.IsDevelopment())
-            app.UseDeveloperExceptionPage();
+
+            await using (var scope = app.Services.CreateAsyncScope())
+            {
+                var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                await db_initializer.InitializeAsync(RemoveBefore: true);
+            }
+
+                if (app.Environment.IsDevelopment())
+                    app.UseDeveloperExceptionPage();
           
 
             app.UseStaticFiles();
