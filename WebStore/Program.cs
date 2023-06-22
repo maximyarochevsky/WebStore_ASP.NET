@@ -6,6 +6,7 @@ using WebStore.Services;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Services.InMemory;
+using WebStore.Services.InSQL;
 
 namespace WebStore
 {
@@ -26,8 +27,9 @@ namespace WebStore
             services.AddTransient<IDbInitializer, DbInitializer>();
 
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddSingleton<IProductData, InMemoryProductData>();
-            
+            //services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
+
             //создание приложения
             var app = builder.Build();
 
