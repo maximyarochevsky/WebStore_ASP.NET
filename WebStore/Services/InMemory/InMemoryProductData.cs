@@ -23,7 +23,7 @@ public class InMemoryProductData : IProductData
             query = query.Where(p => p.SectionId == section_id);
 
         if (Filter?.BrandId is { } brand_id)
-            query = query.Where(p => p.SectionId == brand_id);
+            query = query.Where(p => p.BrandId == brand_id);
         return query;
     }
 }
