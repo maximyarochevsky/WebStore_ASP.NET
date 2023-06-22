@@ -15,7 +15,7 @@ namespace WebStore.Domain.Entities
     public class Product : NamedEntity, IOrderedEntity
 	{
 		public int Order { get; set; }
-		public int SectionId { get; set; }
+		public int? SectionId { get; set; }
 
 		[ForeignKey(nameof(SectionId))]
 		public Section Section { get; set; }

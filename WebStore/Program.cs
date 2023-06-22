@@ -3,12 +3,16 @@ using WebStore.Infastructure.Conventions;
 using WebStore.Infastructure.Middleware;
 using WebStore.Services.Interfaces;
 using WebStore.Services;
+using WebStore.DAL.Context;
+using Microsoft.EntityFrameworkCore;
+using WebStore.Services.InMemory;
+using WebStore.Services.InSQL;
 
 namespace WebStore
 {
     internal partial class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             //билдер приложения
             var builder = WebApplication.CreateBuilder(args);
@@ -18,14 +22,25 @@ namespace WebStore
                 opt.Conventions.Add(new TestConvention());
             });
 
+            services.AddDbContext<WebStoreDB>(opt =>
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+            services.AddTransient<IDbInitializer, DbInitializer>();
+
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddSingleton<IProductData, InMemoryProductData>();
-            
+            //services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
+
             //создание приложения
             var app = builder.Build();
-           
-            if (app.Environment.IsDevelopment())
-            app.UseDeveloperExceptionPage();
+
+            await using (var scope = app.Services.CreateAsyncScope())
+            {
+                var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                await db_initializer.InitializeAsync(RemoveBefore: true);
+            }
+
+                if (app.Environment.IsDevelopment())
+                    app.UseDeveloperExceptionPage();
           
 
             app.UseStaticFiles();
