@@ -26,7 +26,6 @@ namespace WebStore
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
             services.AddTransient<IDbInitializer, DbInitializer>();
 
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
 
