@@ -55,7 +55,6 @@ namespace WebStore.Data
             new Brand { Id = 5, Name = "Oddmolly", Order = 4},
             new Brand { Id = 6, Name = "Boudesijn", Order = 5},
             new Brand { Id = 7, Name = "Rocsh creative culture", Order = 6},
-
         };
 
         public static IEnumerable<Product> Products { get; } = new[]
