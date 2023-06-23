@@ -51,8 +51,10 @@ namespace WebStore.Services.InMemory
             var db_employee = GetById(employee.Id);
 
             if (db_employee is null)
+            {
                 _Logger.LogWarning("Попытка редактирования несуществующего сотрудника с id: {0}", employee.Id);
-            return false;
+                return false;
+            }
 
             db_employee.Id = employee.Id;
             db_employee.FirstName = employee.FirstName;
