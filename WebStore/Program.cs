@@ -7,6 +7,8 @@ using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using WebStore.Services.InMemory;
 using WebStore.Services.InSQL;
+using WebStore.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebStore
 {
@@ -25,6 +27,25 @@ namespace WebStore
             services.AddDbContext<WebStoreDB>(opt =>
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
             services.AddTransient<IDbInitializer, DbInitializer>();
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebStoreDB>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(opt =>
+            {
+            #if DEBUG
+                opt.Password.RequireDigit = false; //необязательные цифры
+                opt.Password.RequireLowercase = false; //необязательный нижиний регистр
+                opt.Password.RequireUppercase = false; //необязательные врехний регистр
+                opt.Password.RequireNonAlphanumeric = false; //необязательные неалфавитные символы
+                opt.Password.RequiredLength = 3; //необязательные неалфавитные символы
+                opt.Password.RequiredUniqueChars = 3; //необязательные неалфавитные символы
+            #endif
+
+                opt.User.RequireUniqueEmail = false;
+                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ1234567890";
+            });
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
