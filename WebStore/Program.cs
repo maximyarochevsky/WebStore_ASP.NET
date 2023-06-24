@@ -9,6 +9,7 @@ using WebStore.Services.InMemory;
 using WebStore.Services.InSQL;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebStore
 {
@@ -45,6 +46,23 @@ namespace WebStore
 
                 opt.User.RequireUniqueEmail = false;
                 opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ1234567890";
+
+                opt.Lockout.AllowedForNewUsers = false;
+                opt.Lockout.MaxFailedAccessAttempts = 10;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            });
+
+            services.ConfigureApplicationCookie(opt=>
+            {
+                opt.Cookie.Name = "WebStore.GB";
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.Expiration = TimeSpan.FromDays(10);
+
+                opt.LoginPath = "/Account/Login";
+                opt.LoginPath = "/Account/Logout";
+                opt.AccessDeniedPath = "/Account/AccessDenied";
+
+                opt.SlidingExpiration = true;
             });
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
@@ -67,6 +85,10 @@ namespace WebStore
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseMiddleware<TestMiddleware>();
 
