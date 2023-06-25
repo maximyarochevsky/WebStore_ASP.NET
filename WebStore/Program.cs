@@ -68,8 +68,9 @@ namespace WebStore
             });
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
+
             services.AddScoped<IProductData, SqlProductData>();
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IEmployeesData, SqlEmployeeData>();
 
             //создание приложения
             var app = builder.Build();
