@@ -1,10 +1,10 @@
-﻿using WebStore.Models;
-using WebStore.Services.Interfaces;
+﻿using WebStore.Services.Interfaces;
 using WebStore.Data;
+using WebStore.Domain.Entities;
 
 namespace WebStore.Services.InMemory
 {
-    public class InMemoryEmployeesData : IEmployeesData
+	public class InMemoryEmployeesData : IEmployeesData
     {
         private readonly ICollection<Employee> _Employees;
         private readonly ILogger<InMemoryEmployeesData> _Logger;

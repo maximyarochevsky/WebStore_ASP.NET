@@ -1,9 +1,8 @@
-﻿using WebStore.Models;
-using WebStore.Domain.Entities;
+﻿using WebStore.Domain.Entities;
 
 namespace WebStore.Data
 {
-    public class TestData
+	public class TestData
     {
         public static List<Employee> __Employees { get; } = new()
         {
