@@ -16,14 +16,15 @@ namespace WebStore.Controllers
                 _UserManager = UserManager; 
         } 
         public IActionResult Register()
+        
         {
             return View(new RegisterUserViewModel());
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel Model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(Model);
 
             var user = new User
@@ -49,7 +50,7 @@ namespace WebStore.Controllers
             return View(new LoginViewModel { ReturnUrl = ReturnUrl});
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(LoginViewModel Model)
 		{
 			if (ModelState.IsValid)

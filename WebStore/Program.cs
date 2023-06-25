@@ -56,10 +56,12 @@ namespace WebStore
             {
                 opt.Cookie.Name = "WebStore.GB";
                 opt.Cookie.HttpOnly = true;
-                opt.Cookie.Expiration = TimeSpan.FromDays(10);
+
+                opt.ExpireTimeSpan = TimeSpan.FromDays(10);
+				//opt.Cookie.Expiration = TimeSpan.FromDays(10); устарело
 
                 opt.LoginPath = "/Account/Login";
-                opt.LoginPath = "/Account/Logout";
+                opt.LogoutPath = "/Account/Logout";
                 opt.AccessDeniedPath = "/Account/AccessDenied";
 
                 opt.SlidingExpiration = true;
