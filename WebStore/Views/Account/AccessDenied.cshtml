@@ -1,4 +1,11 @@
-﻿@page
-@model WebStore.Views.Account.AccessDeniedModel
-@{
+﻿@{
+    ViewData["Title"] = "Отказ в досутпе";
 }
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        <a asp-controller="Home" asp-action="Index">На главную</a>
+    </p>
+</div>

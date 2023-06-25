@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
-using WebStore.Models;
+using WebStore.Domain.Entities;
 using WebStore.Services.Interfaces;
 using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
     //[Route("Staff/{action=Index}/{Id?}")]
+    // [Authorize(Roles = "Admin")]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData _EmployeeData;

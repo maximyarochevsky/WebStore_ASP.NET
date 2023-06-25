@@ -16,14 +16,15 @@ namespace WebStore.Controllers
                 _UserManager = UserManager; 
         } 
         public IActionResult Register()
+        
         {
             return View(new RegisterUserViewModel());
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel Model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(Model);
 
             var user = new User
@@ -39,13 +40,46 @@ namespace WebStore.Controllers
                 return RedirectToAction("Index","Home");
             }
 
+            foreach (var error in registraion_result.Errors)
+                ModelState.AddModelError("", error.Description);
+
+            return View(Model);
         }
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
-            return View();
+            return View(new LoginViewModel { ReturnUrl = ReturnUrl});
         }
-        public IActionResult Logout()
+
+        [HttpPost, ValidateAntiForgeryToken]
+		public async Task<IActionResult> Login(LoginViewModel Model)
+		{
+			if (ModelState.IsValid)
+				return View(Model);
+
+            var login_result = await _SignInManager.PasswordSignInAsync(
+                Model.UserName,
+                Model.Password,
+                Model.RememberMe,
+                true);
+
+            if (login_result.Succeeded)
+            {
+                //return Redirect(Model.ReturnUrl); не безопасно
+
+                //if (Url.IsLocalUrl(Model.ReturnUrl))
+                //    return Redirect(Model.ReturnUrl);
+                //return RedirectToAction("Index", "Home");
+
+                return LocalRedirect(Model.ReturnUrl ?? "/");
+            }
+
+            ModelState.AddModelError("", "Неверное имя пользователя, или пароль");
+			return View(Model);
+		}
+
+		public async Task<IActionResult> Logout()
         {
+            await _SignInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
         public IActionResult AccessDenied()
