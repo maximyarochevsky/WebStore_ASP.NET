@@ -7,7 +7,7 @@ namespace WebStore.Services.InMemory
     [Obsolete("Используйте WebStore.Services.InSQL.SqlEmployeeData. Класс InMemoryEmployeesData будет удален в следующих версиях", true)]
 	public class InMemoryEmployeesData : IEmployeesData
     {
-        private readonly ICollection<Employee> _Employees;
+        private readonly List<Employee> _Employees;
         private readonly ILogger<InMemoryEmployeesData> _Logger;
         private int _MaxFreeId;
 
