@@ -38,7 +38,12 @@ namespace WebStore.Controllers
 
                 return RedirectToAction("Index","Home");
             }
+            foreach (var error in registraion_result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
 
+                return View(Model);
+            }
         }
         public IActionResult Login()
         {
