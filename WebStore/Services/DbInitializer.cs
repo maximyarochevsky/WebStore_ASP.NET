@@ -76,7 +76,7 @@ namespace WebStore.Services
 
             foreach (var product in TestData.Products)
             {
-                product.Section = sections_pool[(int)product.SectionId];
+                product.Section = sections_pool[product.SectionId];
                 if (product.BrandId is { } brand_id)
                 {
                     product.Brand = brands_pool[brand_id];
@@ -90,7 +90,7 @@ namespace WebStore.Services
             foreach (var section in TestData.Sections)
             {
                 section.Id = 0;
-                section.ParentId = 0;
+                section.ParentId = null;
             }
 
             foreach (var brand in TestData.Brands)
@@ -104,7 +104,7 @@ namespace WebStore.Services
                 await _db.Brands.AddRangeAsync(TestData.Brands, Cancel);
                 await _db.Products.AddRangeAsync(TestData.Products, Cancel);
 
-                await _db.SaveChangesAsync();
+                await _db.SaveChangesAsync(Cancel);
 
                 await _db.Database.CommitTransactionAsync(Cancel);
             }
