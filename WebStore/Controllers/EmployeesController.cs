@@ -8,7 +8,7 @@ using WebStore.ViewModels;
 namespace WebStore.Controllers
 {
     //[Route("Staff/{action=Index}/{Id?}")]
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData _EmployeeData;

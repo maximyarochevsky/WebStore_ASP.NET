@@ -49,6 +49,7 @@ namespace WebStore.Services
             await InitializeProductAsync(Cancel).ConfigureAwait(false);
 
             await InitializeEmployeesAsync(Cancel).ConfigureAwait(false);
+
             _Logger.LogInformation("Инициализация БД выполненв успешно");
         }
 

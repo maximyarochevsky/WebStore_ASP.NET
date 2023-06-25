@@ -53,7 +53,7 @@ public class SqlEmployeeData : IEmployeesData
         //var employee = GetById(id); т.к объект может быть большим, нам не обязательно получать его весь, нужен лишь Id => (код)
 
         var employee = _db.Employees
-            .Select(e => new Employee{Id = e.Id,})
+            .Select(e => new Employee{Id = e.Id,}) //неполная проекция - для экномоии памяти и времени на передачу данных
             .FirstOrDefault(e => e.Id == id);
 
         if (employee is null)
