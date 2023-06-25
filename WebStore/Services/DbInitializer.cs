@@ -116,6 +116,8 @@ namespace WebStore.Services
             _Logger.LogInformation("Инициализация сотрудников...");
             await using var transaction = await _db.Database.BeginTransactionAsync(Cancel);
 
+            TestData.__Employees.ForEach(employee => employee.Id = 0);
+
             await _db.Employees.AddRangeAsync(TestData.__Employees, Cancel);
 
             await _db.SaveChangesAsync(Cancel);
