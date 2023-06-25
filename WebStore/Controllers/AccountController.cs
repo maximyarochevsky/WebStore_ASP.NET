@@ -44,11 +44,39 @@ namespace WebStore.Controllers
 
             return View(Model);
         }
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
-            return View();
+            return View(new LoginViewModel { ReturnUrl = ReturnUrl});
         }
-        public IActionResult Logout()
+
+        [HttpPost]
+		public async Task<IActionResult> Login(LoginViewModel Model)
+		{
+			if (ModelState.IsValid)
+				return View(Model);
+
+            var login_result = await _SignInManager.PasswordSignInAsync(
+                Model.UserName,
+                Model.Password,
+                Model.RememberMe,
+                true);
+
+            if (login_result.Succeeded)
+            {
+                //return Redirect(Model.ReturnUrl); не безопасно
+
+                //if (Url.IsLocalUrl(Model.ReturnUrl))
+                //    return Redirect(Model.ReturnUrl);
+                //return RedirectToAction("Index", "Home");
+
+                return LocalRedirect(Model.ReturnUrl ?? "/");
+            }
+
+            ModelState.AddModelError("", "Неверное имя пользователя, или пароль");
+			return View(Model);
+		}
+
+		public IActionResult Logout()
         {
             return RedirectToAction("Index", "Home");
         }
