@@ -5,7 +5,6 @@ using WebStore.Services.Interfaces;
 using WebStore.Services;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
-using WebStore.Services.InMemory;
 using WebStore.Services.InSQL;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;

@@ -8,7 +8,7 @@ using WebStore.ViewModels;
 namespace WebStore.Controllers
 {
     //[Route("Staff/{action=Index}/{Id?}")]
-    // [Authorize(Roles = "Admin")]
+     [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData _EmployeeData;
@@ -35,9 +35,9 @@ namespace WebStore.Controllers
             ViewBag.SelectedEmployee = employee;
             return View(employee);
         }
-
+        [Authorize(Roles = "Administrators")]
         public IActionResult Create() => View("Edit", new EmployeeViewModel());
-
+        [Authorize(Roles = "Administrators")]
         public IActionResult Edit(int? id)
         {
             if (id is null)
@@ -59,6 +59,7 @@ namespace WebStore.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel Model)
         {
@@ -86,6 +87,7 @@ namespace WebStore.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Administrators")]
         public IActionResult Delete(int id)
         {
             if (id < 0) 

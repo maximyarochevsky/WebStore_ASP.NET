@@ -12,7 +12,7 @@ using WebStore.DAL.Context;
 namespace WebStore.DAL.Migrations
 {
     [DbContext(typeof(WebStoreDB))]
-    [Migration("20230625110928_Employees")]
+    [Migration("20230626082853_Employees")]
     partial class Employees
     {
         /// <inheritdoc />
@@ -192,10 +192,6 @@ namespace WebStore.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -218,10 +214,6 @@ namespace WebStore.DAL.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AboutMyself")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -309,8 +301,7 @@ namespace WebStore.DAL.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("SectionId")
-                        .IsRequired()
+                    b.Property<int>("SectionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

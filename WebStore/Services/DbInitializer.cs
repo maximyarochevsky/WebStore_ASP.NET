@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Identity;
 using WebStore.Services.Interfaces;
 
 namespace WebStore.Services
@@ -10,11 +13,19 @@ namespace WebStore.Services
     {
         private readonly WebStoreDB _db;
         private readonly ILogger<DbInitializer> _Logger;
+        private readonly RoleManager<Role> _RoleManager;
+        private readonly UserManager<User> _UserManager;
 
-        public DbInitializer(WebStoreDB db, ILogger<DbInitializer> Logger)
+        public DbInitializer(
+            WebStoreDB db,
+            ILogger<DbInitializer> Logger,
+            UserManager<User> UserManager,
+            RoleManager<Role> RoleManager)
         {
             _db = db;
             _Logger = Logger;
+            _RoleManager = RoleManager;
+            _UserManager = UserManager;
         }
 
         public async Task<bool> RemoveAsync(CancellationToken Cancel = default)
@@ -51,12 +62,14 @@ namespace WebStore.Services
 
             await InitializeEmployeesAsync(Cancel).ConfigureAwait(false);
 
+            await InitializeIdentityAsync(Cancel).ConfigureAwait(false);
+
             _Logger.LogInformation("Инициализация БД выполненв успешно");
         }
 
         private async Task InitializeProductAsync(CancellationToken Cancel)
         {
-            if(_db.Sections.Any())
+            if (_db.Sections.Any())
             {
                 _Logger.LogInformation("Инициализация данных БД не требуется");
                 return;
@@ -110,12 +123,12 @@ namespace WebStore.Services
             }
 
 
-                _Logger.LogInformation("Инициализаиця тестовых данных БД выполнена успешно");
+            _Logger.LogInformation("Инициализаиця тестовых данных БД выполнена успешно");
         }
 
         private async Task InitializeEmployeesAsync(CancellationToken Cancel)
         {
-            if(await _db.Employees.AnyAsync(Cancel))
+            if (await _db.Employees.AnyAsync(Cancel))
             {
                 _Logger.LogInformation("Инициализация сотрудников не требуется");
                 return;
@@ -134,5 +147,59 @@ namespace WebStore.Services
 
             _Logger.LogInformation("Инициализация сотрудников выполнена успешно");
         }
+        private async Task InitializeIdentityAsync(CancellationToken Cancel)
+        {
+            _Logger.LogInformation("Инициализация данных системы Identity");
+
+            var timer = Stopwatch.StartNew();
+
+            async Task CheckRole(string RoleName) // Метод проверяющий роль 
+            {
+                if (await _RoleManager.RoleExistsAsync(RoleName)) // Если роль найдена
+                    _Logger.LogInformation("Роль {0} существует в БД. {1} c", RoleName, timer.Elapsed.TotalSeconds);
+                else // Если роль не найдена, то создаем её
+                {
+                    _Logger.LogInformation("Роль {0} не существует в БД. {1} c", RoleName, timer.Elapsed.TotalSeconds);
+
+                    await _RoleManager.CreateAsync(new Role { Name = RoleName });
+
+                    _Logger.LogInformation("Роль {0} создана. {1} c", RoleName, timer.Elapsed.TotalSeconds);
+                }
+            }
+
+            await CheckRole(Role.Administrators); //Используем метод для проверки наличия администратора
+            await CheckRole(Role.Users); //Используем метод для проверки наличия обычного пользователя
+
+            //Администратор обязательно должен быть!!!
+            if (await _UserManager.FindByNameAsync(User.Administrator) is null)
+            {
+                _Logger.LogInformation("Пользователь {0} отсутствует в БД. Создаю... {1} c", User.Administrator, timer.Elapsed.TotalSeconds);
+
+                var admin = new User
+                {
+                    UserName = User.Administrator, // Присваиваем имя
+                };
+
+                var creation_result = await _UserManager.CreateAsync(admin, User.DefaultAdminPassword);
+                if (creation_result.Succeeded) // Успех создания администратора
+                {
+                    _Logger.LogInformation("Пользователь {0} создан успешно. Наделяю его правами администратора... {1} c", User.Administrator, timer.Elapsed.TotalSeconds);
+
+                    await _UserManager.AddToRoleAsync(admin, Role.Administrators);
+
+                    _Logger.LogInformation("Пользователь {0} наделён правами администратора. {1} c", User.Administrator, timer.Elapsed.TotalSeconds);
+                }
+                else
+                {
+                    var errors = creation_result.Errors.Select(err => err.Description);
+                    _Logger.LogError("Учётная запись администратора не создана. Ошибки:{0}", string.Join(", ", errors)); // Нужен более сложный пароль!
+
+                    throw new InvalidOperationException($"Невозможно создать пользователя {User.Administrator} по причине: {string.Join(", ", errors)}");
+                }
+            }
+
+            _Logger.LogInformation("Данные системы Identity успешно добавлены в БД за {0} c", timer.Elapsed.TotalSeconds);
+        }
     }
+        
 }
