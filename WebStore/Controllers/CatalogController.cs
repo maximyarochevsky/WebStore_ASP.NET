@@ -36,4 +36,13 @@ public class CatalogController : Controller
 
         return View(catalog_model);
     }
+
+    public IActionResult Details(int id)
+    {
+        var product = _ProductData.GetProductById(id);
+
+        if (product is null)
+            return NotFound();
+        return View(product);
+    }
 }
