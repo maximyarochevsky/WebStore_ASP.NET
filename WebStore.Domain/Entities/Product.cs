@@ -23,7 +23,7 @@ namespace WebStore.Domain.Entities
         public int? BrandId { get; set; }
 
         [ForeignKey(nameof(BrandId))]
-		public Brand Brand { get; set; }
+		public Brand? Brand { get; set; }
 
         public string ImageUrl { get; set; }
 
