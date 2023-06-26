@@ -9,6 +9,7 @@ using WebStore.Services.InSQL;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using WebStore.Services.InCookies;
 
 namespace WebStore
 {
@@ -70,9 +71,10 @@ namespace WebStore
 
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IEmployeesData, SqlEmployeeData>();
+            services.AddScoped<ICartService, InCookiesCartService>();
 
-            //создание приложения
-            var app = builder.Build();
+			//создание приложения
+			var app = builder.Build();
 
             await using (var scope = app.Services.CreateAsyncScope())
             {
