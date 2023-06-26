@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebStore.Domain.Entities.Employee>
+﻿@using WebStore.Domain.Entities.Identity;
+@model IEnumerable<WebStore.Domain.Entities.Employee>
 
 @{
     ViewData["Title"] = "Список сотрудников";
@@ -6,8 +7,11 @@
 }
 
     <h3>Сотрудники</h3>
-
+     @if (User.IsInRole(Role.Administrators))
+      {
     <a class="btn btn-default" asp-action="Create">Создать</a>
+      }
+
     @if (Model.Any())
     {
    
@@ -31,8 +35,11 @@
                     <td>@employee.Patronymic</td>
                     <td>@employee.Age</td>
                     <td><a asp-action="Details" asp-route-id="@employee.Id">Информация</a></td>
-                    <td><a asp-action="Edit" asp-route-id="@employee.Id">Редактирование</a></td>
-                    <td><a asp-action="Delete" asp-route-id="@employee.Id">Удаление</a></td>
+                    @if (User.IsInRole(Role.Administrators))
+                    {
+                        <td><a asp-action="Edit" asp-route-id="@employee.Id">Редактирование</a></td>
+                        <td><a asp-action="Delete" asp-route-id="@employee.Id">Удаление</a></td>
+                    }
                 </tr>
             }
     
