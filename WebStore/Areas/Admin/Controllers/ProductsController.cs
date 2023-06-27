@@ -5,7 +5,7 @@ using WebStore.Areas.Admin.ViewModels;
 using WebStore.DAL.Migrations;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Identity;
-using WebStore.Infrastructure.Mapping;
+using WebStore.Infastructure.Mapping;
 using WebStore.Services.Interfaces;
 using WebStore.ViewModels;
 
