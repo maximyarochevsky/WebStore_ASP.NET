@@ -18,9 +18,9 @@ namespace WebStore.Controllers
             return View(orders.Select(order => new UserOrderViewModel
             {
                 Id = order.Id,
-                Address = order.Address,
+                Address = order.Adress,
                 Phone = order.Phone,
-                Description = order.Description,
+                Description = order.Descripction,
                 TotalPrice = order.TotalPrice,
                 Date = order.Date,
             }));
