@@ -72,9 +72,10 @@ namespace WebStore
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IEmployeesData, SqlEmployeeData>();
             services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<IOrderService, SqlOrderService>();
 
-			//создание приложения
-			var app = builder.Build();
+            //создание приложения
+            var app = builder.Build();
 
             await using (var scope = app.Services.CreateAsyncScope())
             {
