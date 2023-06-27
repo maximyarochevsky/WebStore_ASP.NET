@@ -79,7 +79,7 @@ namespace WebStore
             await using (var scope = app.Services.CreateAsyncScope())
             {
                 var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-                await db_initializer.InitializeAsync(RemoveBefore: true);
+                await db_initializer.InitializeAsync(RemoveBefore: true).ConfigureAwait(true);
             }
 
                 if (app.Environment.IsDevelopment())
@@ -96,10 +96,19 @@ namespace WebStore
 
             app.UseMiddleware<TestMiddleware>();
 
-            //app.MapDefaultControllerRoute();
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute(
+				  name: "areas",
+				  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+				);
+
+                endpoints.MapControllerRoute(
+				name: "default",
+				pattern: "{controller=Home}/{action=Index}/{id?}");
+			});
+
+			//app.MapDefaultControllerRoute();
 
             app.Run();
         }
