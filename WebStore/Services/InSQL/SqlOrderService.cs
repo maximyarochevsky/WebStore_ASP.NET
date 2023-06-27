@@ -59,9 +59,9 @@ namespace WebStore.Services.InSQL
             var order = new Order
             {
                 User = user,
-                Address = OrderModel.Address,
+                Adress = OrderModel.Address,
                 Phone = OrderModel.Phone,
-                Description = OrderModel.Description,
+                Descripction = OrderModel.Description,
             };
 
             var products_ids = Cart.Items.Select(item => item.Product.Id).ToArray(); //массив id
