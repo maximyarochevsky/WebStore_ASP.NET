@@ -17,9 +17,9 @@ public class Order : Entity
 
     [Required]
     [MaxLength(200)]
-    public string Address { get; set; }
+    public string Adress { get; set; }
 
-    public string Description { get; set; }
+    public string Descripction { get; set; }
 
     public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
 
