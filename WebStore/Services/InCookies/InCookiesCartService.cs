@@ -12,7 +12,7 @@ namespace WebStore.Services.InCookies
 		private readonly IProductData _ProductData;
 
 		private readonly string _CartName; // имя cookies
-
+	 
 		private Cart Cart
 		{
 			get

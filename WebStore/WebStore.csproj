@@ -25,6 +25,13 @@
     <ProjectReference Include="..\WebStore.Domain\WebStore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties bundleconfig_1json__JsonSchema="https://json.schemastore.org/bundleconfig.json" /></VisualStudio></ProjectExtensions>
 
 </Project>
