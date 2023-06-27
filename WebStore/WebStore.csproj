@@ -46,6 +46,7 @@
     <None Include="Areas\Admin\Views\Shared\Partial\_Navigation.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Partial\_Scripts.cshtml" />
     <None Include="Areas\Admin\Views\Shared\Partial\_Styles.cshtml" />
+    <None Include="Views\Cart\Partial\_CheckOut.cshtml" />
     <None Include="wwwroot\Admin\fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\Admin\fonts\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\Admin\js\bootstrap.min.js" />

@@ -17,14 +17,15 @@ public class WebStoreDB : IdentityDbContext<User, Role, string>
 	{
 
 	}
-
-	protected override void OnModelCreating(ModelBuilder db)
-	{
-		base.OnModelCreating(db);
-
-		//db.Entity<Section>()
-		//	.HasMany(section => section.Products)
-		//	.WithMany(product => product.Section)
-		//	.OnDelete(DeleteBehavior.Cascade);
-	}
+ 
+ 	protected override void OnModelCreating(ModelBuilder db)
+ 	{
+ 		base.OnModelCreating(db);
+ 
+ 		//db.Entity<Section>()
+ 		//	.HasMany(section => section.Products)
+  		//	.WithMany(product => product.Section)
+ 		//	.OnDelete(DeleteBehavior.Cascade);
+ 	}
 }
+ 
