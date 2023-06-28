@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 using WebStore.DAL.Context;
-using WebStore.Data;
-using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Identity;
-using WebStore.Services.Interfaces;
+using WebStore.Interfaces.Services;
+using WebStore.Services.Data;
 
-namespace WebStore.Services
+namespace WebStore.Services.Services
 {
     public class DbInitializer : IDbInitializer
     {
