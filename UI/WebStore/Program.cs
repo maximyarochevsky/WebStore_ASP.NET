@@ -1,15 +1,16 @@
 using System;
 using WebStore.Infastructure.Conventions;
 using WebStore.Infastructure.Middleware;
-using WebStore.Services.Interfaces;
 using WebStore.Services;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
-using WebStore.Services.InSQL;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using WebStore.Services.InCookies;
+using WebStore.Interfaces.Services;
+using WebStore.Services.Services;
+using WebStore.Services.Services.InCookies;
+using WebStore.Services.Services.InSQL;
 
 namespace WebStore
 {
