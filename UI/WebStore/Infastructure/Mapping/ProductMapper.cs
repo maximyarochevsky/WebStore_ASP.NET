@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using WebStore.Domain.Entities;
-using WebStore.ViewModels;
+using WebStore.Domain.ViewModels;
 
 namespace WebStore.Infastructure.Mapping
 {

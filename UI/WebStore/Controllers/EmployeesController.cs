@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
 using WebStore.Domain.Entities;
+using WebStore.Domain.ViewModels;
 using WebStore.Services.Interfaces;
-using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
     //[Route("Staff/{action=Index}/{Id?}")]
-     [Authorize]
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData _EmployeeData;

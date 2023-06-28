@@ -5,9 +5,9 @@ using WebStore.Areas.Admin.ViewModels;
 using WebStore.DAL.Migrations;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.ViewModels;
 using WebStore.Infastructure.Mapping;
 using WebStore.Services.Interfaces;
-using WebStore.ViewModels;
 
 namespace WebStore.Areas.Admin.Controllers
 {
