@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\Views\Home.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Home.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\WebStore.Domain\WebStore.Domain.csproj" />
+    <ProjectReference Include="..\..\Data\WebStore.DAL\WebStore.DAL.csproj" />
+    <ProjectReference Include="..\..\Services\WebStore.Interfaces\WebStore.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Services\WebStore.Services\WebStore.Services.csproj" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\Partial\_Footer.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\Partial\_Navigation.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\Partial\_Scripts.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\Partial\_Styles.cshtml" />
+    <None Include="Views\Cart\Partial\_CheckOut.cshtml" />
+    <None Include="Views\UserProfile\Index.cshtml" />
+    <None Include="Views\UserProfile\Orders.cshtml" />
+    <None Include="Views\UserProfile\Partial\_UserProfileMenu.cshtml" />
+    <None Include="Views\UserProfile\_UserProfileLayout.cshtml" />
+    <None Include="wwwroot\Admin\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Admin\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\Admin\js\bootstrap.min.js" />
+    <None Include="wwwroot\Admin\js\custom.js" />
+    <None Include="wwwroot\Admin\js\jquery-1.10.2.js" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties bundleconfig_1json__JsonSchema="https://json.schemastore.org/bundleconfig.json" /></VisualStudio></ProjectExtensions>
+
+</Project>
