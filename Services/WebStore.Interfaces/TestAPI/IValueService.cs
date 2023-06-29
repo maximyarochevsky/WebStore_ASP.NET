@@ -16,7 +16,7 @@ namespace WebStore.Interfaces.TestAPI
 
         void Add(string value);
 
-        void Edit(int Id, string value);
+        void Edit(int Id, string Value);
 
         bool Delete(int Id);
 
