@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Interfaces", "Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Services", "Services\WebStore.Services\WebStore.Services.csproj", "{8E30CD3C-D972-4A9B-8F75-FFDE2AACDEBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.WebAPI", "Services\WebStore.WebAPI\WebStore.WebAPI.csproj", "{D9002C03-9312-4C7B-9CB3-1914839D4BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.WebAPI", "Services\WebStore.WebAPI\WebStore.WebAPI.csproj", "{D9002C03-9312-4C7B-9CB3-1914839D4BC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.WebAPI.Clients", "WebStore.WebAPI.Clients\WebStore.WebAPI.Clients.csproj", "{D3DE662D-F8E0-4A7A-AFD7-5FB250C8B6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.WebAPI.Clients", "WebStore.WebAPI.Clients\WebStore.WebAPI.Clients.csproj", "{D3DE662D-F8E0-4A7A-AFD7-5FB250C8B6C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

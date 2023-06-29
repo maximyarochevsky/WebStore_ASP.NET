@@ -8,9 +8,11 @@ using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.Interfaces.Services;
+using WebStore.Interfaces.TestAPI;
 using WebStore.Services.Services;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InSQL;
+using WebStore.WebAPI.Clients.Values;
 
 namespace WebStore
 {
@@ -74,6 +76,9 @@ namespace WebStore
             services.AddScoped<IEmployeesData, SqlEmployeeData>();
             services.AddScoped<ICartService, InCookiesCartService>();
             services.AddScoped<IOrderService, SqlOrderService>();
+
+            var configuration = builder.Configuration;
+            services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(configuration["WebAPI"]));
 
             //создание приложения
             var app = builder.Build();
