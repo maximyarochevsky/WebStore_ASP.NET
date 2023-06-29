@@ -1,45 +1,62 @@
-﻿using WebStore.Interfaces.TestAPI;
+﻿using Newtonsoft.Json.Linq;
+using System.Net.Http.Json;
+using WebStore.Interfaces.TestAPI;
 using WebStore.WebAPI.Clients.Base;
 
 namespace WebStore.WebAPI.Clients.Values;
 
 public class ValuesClient : BaseClient, IValuesService
 {
+    public IEnumerable<string> GetValues()
+    {
+        var response = Http.GetAsync(Address).Result;
+        if(response.IsSuccessStatusCode)
+            return response.Content.ReadFromJsonAsync<IEnumerable<string>>().Result; 
+
+        return Enumerable.Empty<string>();  
+    }
+
     public ValuesClient(HttpClient Client) : base(Client, "api/values")
     {
     }
 
     private HttpClient _Client;
-    public void Add(string value)
-    {
-        throw new NotImplementedException();
-    }
 
     public int Count()
     {
-        throw new NotImplementedException();
-    }
+        var response = Http.GetAsync($"{Address}/count").Result;
 
-    public bool Delete(int Id)
-    {
-        throw new NotImplementedException();
-    }
+        if (response.IsSuccessStatusCode)
+            return response.Content.ReadFromJsonAsync<int>().Result;
 
-    public void Edit(int Id, string value)
-    {
-        throw new NotImplementedException();
+        return -1;
     }
 
     public string? GetById(int Id)
     {
-        throw new NotImplementedException();
-    }
+        var response = Http.GetAsync($"{Address}/{Id}").Result;
 
-    public IEnumerable<string> GetValues()
+        if (response.IsSuccessStatusCode)
+            return response.Content.ReadFromJsonAsync<string>().Result;
+
+        return null;
+    }
+    public void Add(string value)
     {
-        throw new NotImplementedException();
+        var response = Http.PostAsJsonAsync(Address, value).Result;
+        response.EnsureSuccessStatusCode();
     }
 
-   
+    public void Edit(int Id, string Value)
+    {
+        var response = Http.PutAsJsonAsync($"{Address}/{Id}", Value).Result;
+        response.EnsureSuccessStatusCode();
+    }
+
+    public bool Delete(int Id)
+    {
+        var response = Http.DeleteAsync($"{Address}/{Id}").Result;
+        return response.IsSuccessStatusCode;
+    }
 }
 
