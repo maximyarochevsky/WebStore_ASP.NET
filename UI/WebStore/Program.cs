@@ -12,6 +12,7 @@ using WebStore.Interfaces.TestAPI;
 using WebStore.Services.Services;
 using WebStore.Services.Services.InCookies;
 using WebStore.Services.Services.InSQL;
+using WebStore.WebAPI.Clients.Employees;
 using WebStore.WebAPI.Clients.Values;
 
 namespace WebStore
@@ -72,13 +73,14 @@ namespace WebStore
 
             //services.AddSingleton<IProductData, InMemoryProductData>();
 
-            services.AddScoped<IProductData, SqlProductData>();
+            //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IEmployeesData, SqlEmployeeData>();
             services.AddScoped<ICartService, InCookiesCartService>();
             services.AddScoped<IOrderService, SqlOrderService>();
 
             var configuration = builder.Configuration;
             services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(configuration["WebAPI"]));
+            services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new(configuration["WebAPI"]));
 
             //создание приложения
             var app = builder.Build();
