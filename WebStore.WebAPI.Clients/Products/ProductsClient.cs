@@ -79,7 +79,7 @@ namespace WebStore.WebAPI.Clients.Products
             return products!.FromDTO()!;
         }
 
-        public IEnumerable<Section> GetSection()
+        public IEnumerable<Section> GetSections()
         {
             var sections = Get<IEnumerable<SectionDTO>>($"{Address}/sections");
             return sections!.FromDTO()!;

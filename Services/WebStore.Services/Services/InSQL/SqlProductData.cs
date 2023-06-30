@@ -95,7 +95,7 @@ public class SqlProductData : IProductData
         return true;
     }
 
-    public Product CreateProduct(string Name, string Order, decimal Price, string ImageIrl, string Section, string Brand)
+    public Product CreateProduct(string Name, int Order, decimal Price, string ImageIrl, string Section, string Brand)
     {
         throw new NotImplementedException();
     }

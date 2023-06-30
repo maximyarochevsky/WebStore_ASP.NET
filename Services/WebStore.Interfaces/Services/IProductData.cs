@@ -15,7 +15,7 @@ public interface IProductData
 
     Product? GetProductById(int id);
 
-    Product CreateProduct(string Name, string Order, decimal Price, string ImageIrl, string Section, string Brand);
+    Product CreateProduct(string Name, int Order, decimal Price, string ImageIrl, string Section, string Brand);
 
     bool Edit(Product product);
 

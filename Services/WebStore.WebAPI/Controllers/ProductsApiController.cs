@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebStore.Domain.DTO;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Services;
 
@@ -82,7 +83,7 @@ namespace WebStore.WebAPI.Controllers
         [HttpPost("new/{Name}")]
         public IActionResult CreateProduct(CreateProductDTO Model)
         {
-            var product = _ProductData.CreateProduct(Model.Name, Model.Order, Model.Price, Model.ImageUrl, Model.Brand);
+            var product = _ProductData.CreateProduct(Model.Name, Model.Order, Model.Price, Model.ImageUrl, Model.Section, Model.Brand);
             return CreatedAtAction(nameof(GetProductGyId), new { Id = product.Id }, product.ToDTO());
         }
     }
