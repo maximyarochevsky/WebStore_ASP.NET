@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 
 namespace WebStore.Domain.DTO.Identity
 {
-    internal class ClaimDTO
+    public abstract class ClaimDTO : UserDTO
     {
+        public IEnumerable<Claim> Claims { get; set; }
     }
+
+    public class AddClaimDTO : ClaimDTO { }
+
+    public class RemoveClaimDTO : ClaimDTO { }
+
+    public class ReplaceClaimDTO : UserDTO
+    {
+        public Claim Claim { get; set; }
+        public Claim NewClaim { get; set; }
+    }
+
+
 }
