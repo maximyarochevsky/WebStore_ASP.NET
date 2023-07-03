@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Interfaces.Identity
+namespace WebStore.Interfaces.Services.Identity
 {
-    internal interface IRolesClient
+    public interface IRolesClient : IRoleStore<Role>
     {
+
     }
 }
