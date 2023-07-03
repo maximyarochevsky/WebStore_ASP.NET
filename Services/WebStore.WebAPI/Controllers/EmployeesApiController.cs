@@ -5,7 +5,7 @@ using WebStore.Interfaces.Services;
 
 namespace WebStore.WebAPI.Controllers;
 
-[Route("api/employees")] // http://localhost:5234/api/employees
+[Route(WebApiAddresses.Employees)] // http://localhost:5234/api/employees
 [ApiController]
 public class EmployeesApiController : ControllerBase
 {
